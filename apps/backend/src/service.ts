@@ -69,15 +69,13 @@ export async function aiResponse(history: ResponseInput) {
 	return response;
 }
 
-const jbImage = fs.readFileSync("C:/Users/Dell/OneDrive/Desktop/jd.jpg");
+/* const jbImage = fs.readFileSync("C:/Users/Dell/OneDrive/Desktop/jd.jpg");
 const dataImage = jbImage.toString("base64");
 const data = fs.readFileSync("C:/Users/Dell/OneDrive/Desktop/resume.pdf");
 const resume = data.toString("base64");
 
-const history = buildBaseHistory(resume, dataImage);
+const history = buildBaseHistory(resume, dataImage); */
 
-fs.writeFileSync("./text.txt", dataImage);
-fs.writeFileSync("./text.json", JSON.stringify(history));
 
 /* try {
 	const response = aiResponse(history);
