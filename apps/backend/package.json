@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "bun ./src/index.js",
-    "start": "bun ./src/index.js"
+    "dev": "bun ./src/ws.ts",
+    "start": "bun ./src/ws.ts"
   },
   "dependencies": {
     "@repo/typescript-config": "workspace:*",
