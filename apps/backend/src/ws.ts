@@ -2,7 +2,6 @@ import "dotenv/config";
 import { WebSocketServer } from "ws";
 import { aiResponse, buildBaseHistory } from "./service.js";
 import { ResponseInput } from "openai/resources/responses/responses.mjs";
-import fs from "fs";
 
 const PORT = Number(process.env.WS_PORT || 8081);
 const wss = new WebSocketServer({ port: PORT });
@@ -19,27 +18,26 @@ wss.on("connection", (socket) => {
 	const handleAIResponse = async (userMessage?: string) => {
 		if (!interviewHistory) return;
 
-        // Add user's message first
-        if (userMessage) {
-            interviewHistory.push({ role: "user", content: userMessage });
-        }
-        
+		// Add user's message first
+		if (userMessage) {
+			interviewHistory.push({ role: "user", content: userMessage });
+		}
+
 		const response = await aiResponse(interviewHistory);
-        
+
 		if (!response || response.error) {
-            socket.send("Interviewer is exhausted! Try again later.");
+			socket.send("Interviewer is exhausted! Try again later.");
 			return;
 		}
-        
+
 		// Update history with AI output
 		interviewHistory = [
-            ...interviewHistory,
+			...interviewHistory,
 			...response.output.map((el) => {
-                delete el.id;
+				delete el.id;
 				return el;
 			}),
 		];
-        
 
 		// Send parsed output to client
 		socket.send(
@@ -56,17 +54,12 @@ wss.on("connection", (socket) => {
 			if (pendingDocs === 2) {
 				resumeBinary = data.toString("base64");
 				pendingDocs--;
-                return
+				return;
 			}
 			if (pendingDocs === 1) {
-                
-                jdBinary = data.toString("base64");
-                fs.writeFileSync(
-					"./text3.txt",
-					JSON.stringify(jdBinary)
-				);
+				jdBinary = data.toString("base64");
 				pendingDocs--;
-                return;
+				return;
 			}
 		}
 
@@ -84,7 +77,6 @@ wss.on("connection", (socket) => {
 					return;
 				}
 				interviewHistory = buildBaseHistory(resumeBinary, jdBinary);
-                fs.writeFileSync("./text2.json", JSON.stringify(interviewHistory))
 				socket.send(
 					JSON.stringify({
 						type: "STARTED",
