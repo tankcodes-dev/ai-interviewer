@@ -345,11 +345,13 @@ export default function Interview() {
 						</p>
 					</div>
 				)}
-				<div className="flex-row">
+				<div className="flex gap-4 flex-row">
 					<div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-1 bg-indigo-600 text-white">
 						<Bot size={16} />
 					</div>
-					<div className="relative px-5 py-4 rounded-2xl max-w-[85%] shadow-sm bg-slate-800/80 border border-slate-700 text-slate-200 rounded-tl-sm w-full">Type <i>Start</i> to begin the interview.</div>
+					<div className="relative px-5 py-4 rounded-2xl max-w-[85%] shadow-sm bg-slate-800/80 border border-slate-700 text-slate-200 rounded-tl-sm w-full">
+						Type <i>Start</i> to begin the interview.
+					</div>
 				</div>
 				{messages.map((msg, idx) => (
 					<div
