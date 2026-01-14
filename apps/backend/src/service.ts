@@ -57,7 +57,7 @@ export function buildBaseHistory(resume: string, jd: string): ResponseInput {
 export async function aiResponse(history: ResponseInput) {
 	console.log("Inside ai response");
 	const response = await openai.responses.parse({
-		model: "gpt-5-nano-2025-08-07",
+		model: "gpt-5-mini-2025-08-07",
 		input: history,
 		text: {
 			format: zodTextFormat(InterviewerResponse, "analysis"),
