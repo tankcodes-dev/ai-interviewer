@@ -30,6 +30,11 @@ export function buildBaseHistory(resume: string, jd: string): ResponseInput {
 			content: `Act as a strict interviewer coach. Based on the job description and the user's resume, conduct a high-pressure mock interview. Critically analyze each response, identify weaknesses, and push the user to clarify vague or shallow answers. Provide improved sample response where necessary. Continously adapt your questions based on previous answers, targeting gaps in knowledge, communication, and experience. The objective is to prepare the user for the tough real-world interviews.`,
 		},
 		{
+			role: "developer",
+			content:
+				"Begin the mock interview after the user sends their first text message.",
+		},
+		{
 			role: "user",
 			content: [
 				{
@@ -43,11 +48,6 @@ export function buildBaseHistory(resume: string, jd: string): ResponseInput {
 					file_data: `data:application/pdf;base64,${resume}`,
 				},
 			],
-		},
-		{
-			role: "developer",
-			content:
-				"Begin the mock interview after the user sends their first text message or says 'start'. As your first question ask user to introduce themselve.",
 		},
 	];
 
