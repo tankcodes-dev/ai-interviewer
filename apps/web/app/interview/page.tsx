@@ -341,18 +341,11 @@ export default function Interview() {
 					<div className="text-center py-20 opacity-50">
 						<Sparkles className="w-12 h-12 mx-auto mb-4 text-slate-600" />
 						<p className="text-slate-500">
-							Waiting for AI to start...
+							Type <i>Start</i> to begin the interview.
 						</p>
 					</div>
 				)}
-				<div className="flex gap-4 flex-row">
-					<div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-1 bg-indigo-600 text-white">
-						<Bot size={16} />
-					</div>
-					<div className="relative px-5 py-4 rounded-2xl max-w-[85%] shadow-sm bg-slate-800/80 border border-slate-700 text-slate-200 rounded-tl-sm w-full">
-						Type <i>Start</i> to begin the interview.
-					</div>
-				</div>
+
 				{messages.map((msg, idx) => (
 					<div
 						key={idx}
