@@ -16,6 +16,7 @@ import {
 	ChevronDown,
 	ChevronUp,
 } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 // --- Types for Web Speech API (needed for TypeScript) ---
 declare global {
@@ -144,6 +145,7 @@ export default function Interview() {
 		{ sender: "AI" | "You"; text: string }[]
 	>([]);
 	const [input, setInput] = useState("");
+	const [aiResponseLoader, setAiResponseLoader] = useState(false);
 
 	// Audio State
 	const [isAudioEnabled, setIsAudioEnabled] = useState(true);
@@ -235,6 +237,7 @@ export default function Interview() {
 						typeof msg.data === "string"
 							? msg.data
 							: JSON.stringify(msg.data);
+					setAiResponseLoader(false);
 					setMessages((prev) => [
 						...prev,
 						{ sender: "AI", text: content },
@@ -278,6 +281,7 @@ export default function Interview() {
 
 		ws.send(JSON.stringify({ type: "CHAT", message: input }));
 		setMessages((prev) => [...prev, { sender: "You", text: input }]);
+		setAiResponseLoader(true);
 		setInput("");
 	};
 
@@ -378,6 +382,13 @@ export default function Interview() {
 						</div>
 					</div>
 				))}
+				{aiResponseLoader && (
+					<div className="space-y-2">
+						<Bot size={16} />
+						<Skeleton className="h-4 w-[250px] bg-slate-800/80" />
+						<Skeleton className="h-4 w-[200px] bg-slate-800/80" />
+					</div>
+				)}
 				<div ref={messagesEndRef} />
 			</div>
 

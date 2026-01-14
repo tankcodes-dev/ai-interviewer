@@ -56,11 +56,12 @@ export function buildBaseHistory(resume: string, jd: string): ResponseInput {
 export async function aiResponse(history: ResponseInput) {
 	console.log("Inside ai response");
 	const response = await openai.responses.parse({
-		model: "gpt-4o-mini",
+		model: "gpt-5-nano-2025-08-07",
 		input: history,
 		text: {
 			format: zodTextFormat(InterviewerResponse, "analysis"),
 		},
+		prompt_cache_key: "tankcodes-ai-interviewer",
 	});
 	console.log("response generated");
 
@@ -75,7 +76,6 @@ const data = fs.readFileSync("C:/Users/Dell/OneDrive/Desktop/resume.pdf");
 const resume = data.toString("base64");
 
 const history = buildBaseHistory(resume, dataImage); */
-
 
 /* try {
 	const response = aiResponse(history);
